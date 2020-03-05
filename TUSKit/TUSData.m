@@ -17,7 +17,7 @@
 #define TUS_BUFSIZE (32*1024)
 
 @interface TUSData ()
-@property (assign) long long offset;
+@property (assign) unsigned long long offset;
 @property (strong, nonatomic) NSInputStream* inputStream;
 @property (strong, nonatomic) NSOutputStream* outputStream;
 @property (strong, nonatomic) NSData* data;
@@ -104,12 +104,12 @@
 }
 
 
-- (NSData*)dataChunk:(long long)chunkSize {
+- (NSData*)dataChunk:(NSUInteger)chunkSize {
     return [self dataChunk:chunkSize fromOffset:_offset];
 }
 
-- (NSData*)dataChunk:(long long)chunkSize
-          fromOffset: (NSUInteger)offset {
+- (NSData*)dataChunk:(NSUInteger)chunkSize
+          fromOffset: (unsigned long long)offset {
     return [_data subdataWithRange:NSMakeRange(offset, chunkSize)];
 }
 

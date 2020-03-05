@@ -23,13 +23,13 @@
 
 - (long long)length;
 - (void)stop;
-- (void)setOffset:(long long)offset;
+- (void)setOffset:(unsigned long long)offset;
 - (BOOL)open; // Re-open a closed TUSData object if it can be. Return YES if the TUSData object is open after the call.
 - (void)close; // Close this TUSData object if it can be
 
-- (NSData*)dataChunk:(long long)chunkSize;
+- (NSData*)dataChunk:(NSUInteger)chunkSize;
 
-- (NSData*)dataChunk:(long long)chunkSize
-          fromOffset: (NSUInteger)offset;
+- (NSData*)dataChunk:(NSUInteger)chunkSize
+          fromOffset: (unsigned long long)offset;
 
 @end

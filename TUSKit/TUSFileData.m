@@ -20,7 +20,7 @@
 -(instancetype)initWithFileURL:(NSURL *)url
 {
     // Check file first
-    if (![[NSFileManager defaultManager] isReadableFileAtPath:url.filePathURL]  ){
+    if (![[NSFileManager defaultManager] isReadableFileAtPath:url.path]  ){
         return nil;
     }
     
@@ -47,7 +47,7 @@
 }
 
 - (NSUInteger)getBytes:(uint8_t *)buffer
-            fromOffset:(NSUInteger)offset
+            fromOffset:(unsigned long long)offset
                 length:(NSUInteger)length
                  error:(NSError **)error
 {
@@ -97,8 +97,8 @@
     
 }
 
-- (NSData*)dataChunk:(long long)chunkSize
-          fromOffset: (NSUInteger)offset
+- (NSData*)dataChunk:(NSUInteger)chunkSize
+          fromOffset: (unsigned long long)offset
 {
     [self.fileHandle seekToFileOffset:offset];
     NSData *chunkData = [self.fileHandle readDataOfLength:chunkSize];

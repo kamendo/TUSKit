@@ -698,7 +698,7 @@ typedef void(^NSURLSessionTaskCompletionHandler)(NSData * _Nullable data, NSURLR
     TUSResumableUploadState state = stateObj.unsignedIntegerValue;
     NSDictionary *metadata = serializedUpload[STORE_KEY_METADATA];
     NSDictionary *headers = serializedUpload[STORE_KEY_UPLOAD_HEADERS];
-    NSDictionary *uploadUrl = [NSURL URLWithString:serializedUpload[STORE_KEY_UPLOAD_URL]];
+    NSURL *uploadUrl = [NSURL URLWithString:serializedUpload[STORE_KEY_UPLOAD_URL]];
     
     NSURL * savedDelegateEndpoint = [NSURL URLWithString:serializedUpload[STORE_KEY_DELEGATE_ENDPOINT]];
     if (![savedDelegateEndpoint.absoluteString isEqualToString:delegate.createUploadURL.absoluteString]){ // Check saved delegate endpoint
@@ -723,7 +723,7 @@ typedef void(^NSURLSessionTaskCompletionHandler)(NSData * _Nullable data, NSURLR
         }
         
         if (fileSize.unsignedLongLongValue != expectedLength.unsignedLongLongValue){
-            NSLog(@"Expected file size (%ulld) for saved upload %@ does not match actual file size (%ulld)", fileSize.unsignedLongLongValue, uploadId, expectedLength.unsignedLongLongValue);
+            NSLog(@"Expected file size (%llu) for saved upload %@ does not match actual file size (%llu)", fileSize.unsignedLongLongValue, uploadId, expectedLength.unsignedLongLongValue);
             return nil;
         }
     } else if (state != TUSResumableUploadStateComplete) { // If we do not have a file url and the upload isn't complete, then we were reloading using the wrong method.
