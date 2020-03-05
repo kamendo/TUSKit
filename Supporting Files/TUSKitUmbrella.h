@@ -7,7 +7,6 @@
 //
 
 #import "TUSKit.h"
-#import "TUSAssetData.h"
 #import "TUSData.h"
 #import "TUSErrors.h"
 #import "TUSFileData.h"
