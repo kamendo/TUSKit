@@ -90,11 +90,11 @@
 }
 
 - (NSUInteger)getBytes:(uint8_t *)buffer
-            fromOffset:(NSUInteger)offset
+            fromOffset:(unsigned long long)offset
                 length:(NSUInteger)length
                  error:(NSError **)error
 {
-    NSRange range = NSMakeRange(offset, length);
+    NSRange range = NSMakeRange((NSUInteger)offset, length);
     if (offset + length > _data.length) {
         return 0;
     }
@@ -110,7 +110,7 @@
 
 - (NSData*)dataChunk:(NSUInteger)chunkSize
           fromOffset: (unsigned long long)offset {
-    return [_data subdataWithRange:NSMakeRange(offset, chunkSize)];
+    return [_data subdataWithRange:NSMakeRange((NSUInteger)offset, chunkSize)];
 }
 
 #pragma mark - NSStreamDelegate Protocol Methods
@@ -140,7 +140,7 @@
             NSError* error = NULL;
             NSUInteger bytesRead = [self getBytes:buffer
                                        fromOffset:[self offset]
-                                           length:length
+                                           length:(NSUInteger)length
                                             error:&error];
             if (!bytesRead) {
                 TUSLog(@"Unable to read bytes due to: %@", error);

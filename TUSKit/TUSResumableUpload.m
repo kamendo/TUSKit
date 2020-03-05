@@ -560,8 +560,8 @@ typedef void(^NSURLSessionTaskCompletionHandler)(NSData * _Nullable data, NSURLR
     //If we are using chunked sizes, set the chunkSize and retrieve the data
     //with the offset and size of self.chunkSize
     if (self.chunkSize > 0) {
-        request.HTTPBody = [self.data dataChunk:self.chunkSize];
-        TUSLog(@"Uploading chunk sized %lu / %lld ", request.HTTPBody.length, self.chunkSize);
+        request.HTTPBody = [self.data dataChunk:(NSUInteger)self.chunkSize];
+        TUSLog(@"Uploading chunk sized %lu / %lld ", (unsigned long)request.HTTPBody.length, self.chunkSize);
     } else {
         request.HTTPBodyStream = self.data.dataStream;
     }
